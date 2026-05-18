@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 // Import Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Teacher from "./pages/Teacher";
 import Academics from "./pages/Academics";
 import Admissions from "./pages/Admission";
 import Contact from "./pages/Contact";
@@ -49,11 +50,12 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/teacher" element={<Teacher/>}/>
             <Route path="/academics" element={<Academics />} />
             <Route path="/admissions" element={<Admissions />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
-
+            
             {/* Catch-all route for 404 Page Not Found */}
             <Route path="*" element={<NotFound />} />
             
