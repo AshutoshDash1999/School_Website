@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BookOpen,
-  ClipboardCheck,
-  Download,
-  Bell,
-  User,
-} from "lucide-react";
+import { BookOpen, ClipboardCheck, Download, Bell, User } from "lucide-react";
 
 import physicsNotes from "../assets/prospectus/physics-notes.pdf";
 import chemistryLab from "../assets/prospectus/chemistry-lab.pdf";
@@ -24,6 +18,32 @@ const Student = () => {
       title: "Science Project",
       subject: "Science",
       due: "28 May 2026",
+    },
+  ];
+  const notifications = [
+    {
+      id: 1,
+      title: "New Notice Released",
+      message: "School annual function scheduled for June 15.",
+      type: "notice",
+    },
+    {
+      id: 2,
+      title: "Assignment Reminder",
+      message: "Math assignment due tomorrow.",
+      type: "assignment",
+    },
+    {
+      id: 3,
+      title: "Event Alert",
+      message: "Science exhibition registration is open.",
+      type: "event",
+    },
+    {
+      id: 4,
+      title: "Parent Meeting Reminder",
+      message: "Parent-teacher meeting will be held on June 20.",
+      type: "parent",
     },
   ];
 
@@ -101,7 +121,7 @@ const Student = () => {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold">4</h2>
+              <h2 className="text-3xl font-bold">{notifications.length}</h2>
               <p className="text-gray-500">Notifications</p>
             </div>
           </div>
@@ -131,6 +151,32 @@ const Student = () => {
               <p className="text-red-500 mt-3 font-semibold">
                 Due: {assignment.due}
               </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Notification Center */}
+      <div className="bg-white rounded-3xl shadow-2xl p-8 mb-10">
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">
+          Notification Center
+        </h2>
+
+        <div className="space-y-4">
+          {notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className="border rounded-2xl p-5 bg-gradient-to-r from-white to-blue-50 hover:shadow-xl transition duration-300"
+            >
+              <h3 className="text-xl font-bold text-gray-800">
+                {notification.title}
+              </h3>
+
+              <p className="text-gray-600 mt-2">{notification.message}</p>
+
+              <span className="text-sm text-blue-600 font-medium">
+                {notification.type}
+              </span>
             </div>
           ))}
         </div>
