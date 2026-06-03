@@ -37,7 +37,7 @@ const EventCalendar = () => {
             className={`px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 cursor-pointer ${
               currentRole === role
                 ? "bg-blue-600 text-white shadow-xl scale-105"
-                : "bg-white text-gray-700 border border-gray-300 hover:bg-blue-50"
+                : "bg-[var(--card-bg)] text-gray-700 border border-gray-300 hover:bg-blue-50"
             }`}
           >
             {role.charAt(0).toUpperCase() + role.slice(1)}
@@ -47,18 +47,8 @@ const EventCalendar = () => {
 
       {/* Calendar Section */}
       <div className="flex justify-center mb-16 sm:mb-32 mt-6">
-        <div className="bg-white p-4 sm:p-8 rounded-3xl shadow-2xl border border-blue-100 sm:scale-125">
-          <Calendar
-            onChange={setDate}
-            value={date}
-            tileClassName={({ date }) => {
-              const eventDate = date.toISOString().split("T")[0];
-
-              return filteredEvents.some((event) => event.date === eventDate)
-                ? "bg-blue-500 text-white rounded-full"
-                : null;
-            }}
-          />
+        <div className="bg-[var(--card-bg)] p-4 sm:p-8 rounded-3xl shadow-2xl border border-blue-100 sm:scale-125">
+          <Calendar onChange={setDate} value={date} />
         </div>
       </div>
 
@@ -67,17 +57,16 @@ const EventCalendar = () => {
       </h2>
       {/* Event Cards */}
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {selectedDateEvents.length > 0 ? (
-          selectedDateEvents.map((event) => (
-            <div
-              key={event.id}
-              className="bg-white rounded-3xl shadow-xl p-6 hover:scale-105 transition-all duration-300 border border-gray-100"
-            >
-              {/* Card Header */}
-              <div className="flex flex-wrap justify-between items-start gap-2 mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">
-                  {event.title}
-                </h2>
+        {filteredEvents.map((event) => (
+          <div
+            key={event.id}
+            className="bg-[var(--card-bg)] rounded-3xl shadow-xl p-6 hover:scale-105 transition-all duration-300 border border-gray-100"
+          >
+            {/* Card Header */}
+            <div className="flex flex-wrap justify-between items-start gap-2 mb-4">
+              <h2 className="text-2xl font-bold text-gray-800">
+                {event.title}
+              </h2>
 
                 <span className="bg-blue-100 text-blue-700 text-sm px-4 py-1 rounded-full capitalize">
                   {event.role}

@@ -42,6 +42,32 @@ const Student = () => {
       due: "28 May 2026",
     },
   ];
+  const notifications = [
+    {
+      id: 1,
+      title: "New Notice Released",
+      message: "School annual function scheduled for June 15.",
+      type: "notice",
+    },
+    {
+      id: 2,
+      title: "Assignment Reminder",
+      message: "Math assignment due tomorrow.",
+      type: "assignment",
+    },
+    {
+      id: 3,
+      title: "Event Alert",
+      message: "Science exhibition registration is open.",
+      type: "event",
+    },
+    {
+      id: 4,
+      title: "Parent Meeting Reminder",
+      message: "Parent-teacher meeting will be held on June 20.",
+      type: "parent",
+    },
+  ];
 
   const resources = [
     {
@@ -62,11 +88,18 @@ const Student = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 overflow-hidden">
+    <div
+    className="min-h-screen p-4 sm:p-6 overflow-hidden"
+    style={{
+      background: "var(--bg-primary)",
+      color: "var(--text-primary)",
+    }}
+  >
+
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white rounded-3xl p-8 shadow-2xl mb-10">
         <div className="flex items-center gap-4">
-          <div className="bg-white text-blue-700 p-4 rounded-full shadow-lg">
+          <div className="bg-[var(--card-bg)] text-blue-700 p-4 rounded-full shadow-lg">
             <User size={32} />
           </div>
 
@@ -84,7 +117,7 @@ const Student = () => {
 
       {/* Stats Cards */}
       <div className="grid md:grid-cols-3 gap-6 mb-10">
-        <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
+        <div className="bg-[var(--card-bg)] rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
           <div className="flex items-center gap-4">
             <div className="bg-blue-100 p-3 rounded-full text-blue-700">
               <BookOpen />
@@ -97,7 +130,7 @@ const Student = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
+        <div className="bg-[var(--card-bg)] rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
           <div className="flex items-center gap-4">
             <div className="bg-green-100 p-3 rounded-full text-green-700">
               <ClipboardCheck />
@@ -111,14 +144,14 @@ const Student = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
+        <div className="bg-[var(--card-bg)] rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
           <div className="flex items-center gap-4">
             <div className="bg-yellow-100 p-3 rounded-full text-yellow-700">
               <Bell />
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold">4</h2>
+              <h2 className="text-3xl font-bold">{notifications.length}</h2>
               <p className="text-gray-500">Notifications</p>
             </div>
           </div>
@@ -206,7 +239,7 @@ const Student = () => {
       </div>
 
       {/* Assignments */}
-      <div className="bg-white rounded-3xl shadow-2xl p-8 mb-10">
+      <div className="bg-[var(--card-bg)] rounded-3xl shadow-2xl p-8 mb-10">
         <h2 className="text-3xl font-bold text-blue-700 mb-6">
           Upcoming Assignments
         </h2>
@@ -233,8 +266,34 @@ const Student = () => {
         </div>
       </div>
 
+      {/* Notification Center */}
+      <div className="bg-white rounded-3xl shadow-2xl p-8 mb-10">
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">
+          Notification Center
+        </h2>
+
+        <div className="space-y-4">
+          {notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className="border rounded-2xl p-5 bg-gradient-to-r from-white to-blue-50 hover:shadow-xl transition duration-300"
+            >
+              <h3 className="text-xl font-bold text-gray-800">
+                {notification.title}
+              </h3>
+
+              <p className="text-gray-600 mt-2">{notification.message}</p>
+
+              <span className="text-sm text-blue-600 font-medium">
+                {notification.type}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Study Materials */}
-      <div className="bg-white rounded-3xl shadow-2xl p-8">
+      <div className="bg-[var(--card-bg)] rounded-3xl shadow-2xl p-8">
         <h2 className="text-3xl font-bold text-blue-700 mb-6">
           Study Materials
         </h2>
