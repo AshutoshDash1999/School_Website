@@ -38,7 +38,7 @@ const Navbar = () => {
       `}</style>
 
       {/* Changed bg-white to bg-blue-600 and updated border */}
-      <nav className="bg-blue-600 border-b border-blue-500 sticky top-0 z-50 shadow-md">
+      <nav className="bg-blue-600 border-b border-blue-500 fixed top-0 left-0 w-full z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             {/* Logo Section */}

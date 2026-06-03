@@ -50,7 +50,7 @@ const App = () => {
         <Navbar />
 
         {/* Page Content: This section grows to fill space, pushing Footer down */}
-        <main className="grow">
+        <main className="grow pt-16">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
