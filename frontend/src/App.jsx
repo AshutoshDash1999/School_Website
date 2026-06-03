@@ -45,7 +45,10 @@ const App = () => {
       <ScrollToTop />
 
       {/* Main Layout Wrapper */}
-      <div className="flex flex-col min-h-screen">
+      <div
+        className="flex flex-col min-h-screen"
+      >
+
         {/* Navigation Bar */}
         <Navbar />
 
