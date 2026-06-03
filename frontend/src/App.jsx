@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Application from "./pages/Application";
 import {
   HashRouter as Router,
   Routes,
@@ -57,6 +58,7 @@ const App = () => {
             <Route path="/teacher" element={<Teacher/>}/>
             <Route path="/academics" element={<Academics />} />
             <Route path="/admissions" element={<Admissions />} />
+            <Route path="/apply" element={<Application />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/calendar" element={<EventCalendar />} />
