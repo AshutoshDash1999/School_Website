@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { teachers } from "../data/Teachers";
+import AttendanceManager from "../components/AttendanceManager";
 import TeacherCard from "../components/TeacherCard";
 import API from "../utils/axios";
 import { BookOpen, Calendar, Send, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
@@ -48,7 +49,7 @@ export default function Teacher() {
   };
 
   return (
-    <div className="bg-slate-50 py-16 animate-in fade-in duration-500 min-h-screen">
+    <div className="bg-[var(--bg-primary)] py-16 animate-in fade-in duration-500 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ========================================== */}
@@ -162,9 +163,9 @@ export default function Teacher() {
               </div>
 
               {/* Class Schedule / Updates */}
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 flex flex-col justify-between">
+              <div className="bg-[var(--card-bg)] rounded-3xl border border-slate-200 shadow-sm p-8 flex flex-col justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6 flex items-center gap-2">
                     <Calendar className="text-blue-600" />
                     Today's Schedule
                   </h2>
@@ -174,12 +175,12 @@ export default function Teacher() {
                       { time: "11:30 AM", sub: "AP Calculus", room: "Hall B" },
                       { time: "02:00 PM", sub: "Mentorship Session", room: "Office 204" },
                     ].map((sched, idx) => (
-                      <div key={idx} className="flex gap-4 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                      <div key={idx} className="flex gap-4 p-3 bg-[var(--bg-secondary)] rounded-xl border border-slate-100">
                         <div className="text-xs font-bold text-blue-600 bg-blue-50 p-2 rounded-lg flex items-center justify-center min-w-[75px]">
                           {sched.time}
                         </div>
                         <div>
-                          <h4 className="font-bold text-sm text-slate-800">{sched.sub}</h4>
+                          <h4 className="font-bold text-sm text-[var(--text-primary)]">{sched.sub}</h4>
                           <span className="text-xs text-slate-500">{sched.room}</span>
                         </div>
                       </div>
@@ -195,7 +196,7 @@ export default function Teacher() {
             </div>
             
             {/* Divider */}
-            <div className="w-full h-px bg-slate-200 my-16"></div>
+            <div className="w-full h-px bg-[var(--border-color)] my-16"></div>
           </div>
         )}
 
@@ -205,7 +206,7 @@ export default function Teacher() {
         
         {/* Header */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-4">
+          <h2 className="text-4xl font-bold text-[var(--text-primary)] mb-6">
             World-Class Educators
           </h2>
           <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-6"></div>
@@ -220,6 +221,7 @@ export default function Teacher() {
             <TeacherCard key={teacher.id} teacher={teacher} />
           ))}
         </div>
+        <AttendanceManager />
       </div>
     </div>
   );
