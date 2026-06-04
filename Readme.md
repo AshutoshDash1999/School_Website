@@ -1,6 +1,6 @@
 # 🎓 EduStream Academy Portal
 
-EduStream is a comprehensive Full-Stack Academic Management Portal designed to bridge the gap between students, faculty, and administration. Built with the **MERN Stack (MongoDB, Express.js, React.js, Node.js)**, it features real-time notice boards, academic resource sharing, and an AI-integrated support system for student inquiries.
+EduStream is a comprehensive Full-Stack Academic Management Portal designed to bridge the gap between students, faculty, and administration.Built with the MERN stack (MongoDB, Express, React, Node.js), it features real-time notice boards, academic resource sharing, and an AI-integrated support system for student inquiries.
 
 ---
 
@@ -8,7 +8,7 @@ EduStream is a comprehensive Full-Stack Academic Management Portal designed to b
 
 ### 📢 Real-Time Notice Board
 
-* Dynamic announcements fetched from the database.
+* Dynamic announcements fetched from the MongoDB database.
 * Instant updates for students and faculty.
 
 ### 📚 Academic Resource Hub
@@ -63,7 +63,7 @@ EduStream is a comprehensive Full-Stack Academic Management Portal designed to b
 SCHOOL_WEBSITE/
 │
 ├── backend/                 # Node.js & Express Server
-│   ├── config/              # Database Connection Logic
+│   ├── config/              # MongoDB Connection Logic
 │   ├── controllers/         # Business Logic
 │   ├── routes/              # API Endpoints
 │   └── server.js            # Entry Point
