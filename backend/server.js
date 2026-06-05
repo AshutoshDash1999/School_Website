@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const cookieParser = require("cookie-parser");
 
@@ -9,6 +10,7 @@ const authRoutes = require("./routes/Auth");
 const inquiryRoutes = require('./routes/inquiryRoutes.js');
 const applicationRoutes = require("./routes/applicationRoutes");
 const contactRoutes = require('./routes/contactRoutes.js');
+const teacherRoutes = require('./routes/teacherRoutes');
 dotenv.config();
 const app = express();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -20,6 +22,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/inquiries", inquiryRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/teacher", teacherRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // connect to mongodb
 
 // connect to mongodb with proper try-catch
