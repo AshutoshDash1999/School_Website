@@ -5,6 +5,14 @@ import "react-calendar/dist/Calendar.css";
 import events from "../data/events";
 
 const roles = ["student", "teacher", "staff"];
+const getDaysLeft = (eventDate) => {
+  const today = new Date();
+  const targetDate = new Date(eventDate);
+
+  const difference = targetDate - today;
+
+  return Math.ceil(difference / (1000 * 60 * 60 * 24));
+};
 
 const EventCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -44,6 +52,34 @@ const EventCalendar = () => {
           </button>
         ))}
       </div>
+
+      <div className="text-center mb-8">
+        <p className="text-xl font-semibold text-gray-700">
+          Total Upcoming Events: {filteredEvents.length}
+        </p>
+      </div>
+
+      {upcomingEvent && (
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border-l-4 border-yellow-500 p-6 rounded-2xl shadow-lg">
+            <h2 className="text-2xl font-bold text-yellow-800 mb-2">
+              🌟 Upcoming Event
+            </h2>
+
+            <h3 className="text-xl font-semibold text-gray-800">
+              {upcomingEvent.title}
+            </h3>
+
+            <p className="text-gray-600 mt-1">📅 {upcomingEvent.date}</p>
+
+            <p className="text-gray-700 mt-2">{upcomingEvent.description}</p>
+
+            <div className="mt-4 inline-block bg-red-500 text-white px-4 py-2 rounded-full font-bold">
+              ⏳ {getDaysLeft(upcomingEvent.date)} Days Remaining
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Calendar Section */}
       <div className="flex justify-center mb-16 sm:mb-32 mt-6">
