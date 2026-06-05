@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/Auth");
 const inquiryRoutes = require('./routes/inquiryRoutes.js');
+const applicationRoutes = require("./routes/applicationRoutes");
+const contactRoutes = require('./routes/contactRoutes.js');
 dotenv.config();
 const app = express();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -16,6 +18,8 @@ app.use(cookieParser());
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/inquiries", inquiryRoutes);
+app.use("/api/applications", applicationRoutes);
+app.use("/api/contact", contactRoutes);
 // connect to mongodb
 
 // connect to mongodb with proper try-catch
