@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { Moon, Sun } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const [activeDropdown, setActiveDropdown] = useState(null);
   const { theme, toggleTheme } = useTheme();
   const navLinks = [
@@ -40,7 +41,7 @@ const Navbar = () => {
       `}</style>
 
       {/* Changed bg-white to bg-blue-600 and updated border */}
-      <nav className="bg-blue-600 border-b border-blue-500 fixed top-0 left-0 w-full z-50 shadow-none">
+      <nav className="bg-blue-600 border-b border-blue-500 fixed top-0 left-0 w-full z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             {/* Logo Section */}
@@ -62,7 +63,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-blue-50 hover:text-white transition-colors font-medium"
+                  className={`font-medium transition-colors ${location.pathname === link.path
+                      ? "text-white border-b-2 border-white pb-1"
+                      : "text-blue-50 hover:text-white"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -126,7 +130,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            
+
 
             <button
               className="theme-toggle ml-2 flex items-center justify-center"
@@ -138,7 +142,7 @@ const Navbar = () => {
               ) : (
                 <Sun size={24} />
               )}
-          </button>
+            </button>
 
             {/* Mobile Menu Button - Changed to white */}
             <div className="md:hidden flex items-center">
@@ -171,7 +175,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-          
+
         </div>
 
         {/* Mobile Menu Dropdown - Matching Blue Theme */}
