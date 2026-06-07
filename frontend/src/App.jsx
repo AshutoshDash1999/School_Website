@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 
 // Import Components
@@ -23,11 +24,12 @@ import Scholarship from "./pages/Scholarship";
 import Gallery from "./pages/Gallery";
 import Student from "./pages/Student";
 import DownloadProspectus from "./pages/DownloadProspectus";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-/**
- * ScrollToTop ensures that every time a user navigates to a new page,
- * the window scrolls back to the top automatically.
- */
+
+import { AuthProvider } from "./context/AuthContext";
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -38,42 +40,134 @@ const ScrollToTop = () => {
   return null;
 };
 
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  
+  if (!token) {
+    return <Navigate to="/register" replace />;
+  }
+  
+  return children;
+};
+
+
+const PublicRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  
+  if (token) {
+    return <Navigate to="/home" replace />;
+  }
+  
+  return children;
+};
+
 const App = () => {
   return (
-    <Router>
-      {/* Helper to reset scroll position on navigation */}
-      <ScrollToTop />
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
 
-      {/* Main Layout Wrapper */}
-      <div className="flex flex-col min-h-screen">
-        {/* Navigation Bar */}
-        <Navbar />
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
 
-        {/* Page Content: This section grows to fill space, pushing Footer down */}
-        <main className="grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/teacher" element={<Teacher/>}/>
-            <Route path="/academics" element={<Academics />} />
-            <Route path="/admissions" element={<Admissions />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/calendar" element={<EventCalendar />} />
-            <Route path="/admissions/scholarship" element={<Scholarship />} />
-            <Route path="/prospectus" element={<DownloadProspectus />} /> 
-            <Route path="/student" element={<Student />} />
-            
-            {/* Catch-all route for 404 Page Not Found */}
-            <Route path="*" element={<NotFound />} />
-            
-          </Routes>
-        </main>
+          <main className="grow">
+            <Routes>
+              
+              <Route path="/" element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              } />
+              
+              
+              <Route path="/login" element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              } />
+              <Route path="/register" element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              } />
+              
+             
+              <Route path="/home" element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/about" element={
+                <ProtectedRoute>
+                  <About />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/teacher" element={
+                <ProtectedRoute>
+                  <Teacher />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/academics" element={
+                <ProtectedRoute>
+                  <Academics />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/admissions" element={
+                <ProtectedRoute>
+                  <Admissions />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/gallery" element={
+                <ProtectedRoute>
+                  <Gallery />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/contact" element={
+                <ProtectedRoute>
+                  <Contact />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/calendar" element={
+                <ProtectedRoute>
+                  <EventCalendar />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/admissions/scholarship" element={
+                <ProtectedRoute>
+                  <Scholarship />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/prospectus" element={
+                <ProtectedRoute>
+                  <DownloadProspectus />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/student" element={
+                <ProtectedRoute>
+                  <Student />
+                </ProtectedRoute>
+              } />
 
-        {/* Site Footer */}
-        <Footer />
-      </div>
-    </Router>
+              
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 

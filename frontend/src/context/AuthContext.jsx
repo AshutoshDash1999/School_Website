@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Register Function
+  // Register Function - UPDATED with token save
   const register = async (name, email, password) => {
     try {
       const { data } = await api.post("/auth/register", {
@@ -62,6 +62,13 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
+
+      // ✅ Save token and user after registration
+      if (data.token) {
+        setUser(data);
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        localStorage.setItem("token", data.token);
+      }
 
       return data;
     } catch (error) {

@@ -1,3 +1,4 @@
+
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -20,7 +21,7 @@ const Login = () => {
 
     try {
       await login(formData.email, formData.password);
-      navigate("/dashboard");
+      navigate("/home");
     } catch (err) {
       console.error("Login Error:", err);
 
@@ -48,7 +49,7 @@ const Login = () => {
           </div>
         )}
 
-        <form onSubmit={onSubmit} className="space-y-6">
+        <form onSubmit={onSubmit} className="space-y-6" autoComplete="off">
           
           {/* Email */}
           <div>
@@ -58,8 +59,8 @@ const Login = () => {
             <input
               type="email"
               name="email"
+              autoComplete="new-email"
               value={formData.email}
-              autoComplete="email"
               onChange={onChange}
               required
               className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 outline-none transition"
@@ -85,8 +86,8 @@ const Login = () => {
             <input
               type="password"
               name="password"
+              autoComplete="new-password"
               value={formData.password}
-              autoComplete="current-password"
               onChange={onChange}
               required
               className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 outline-none transition"

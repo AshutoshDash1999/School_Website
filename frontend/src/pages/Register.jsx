@@ -1,3 +1,4 @@
+
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -25,13 +26,13 @@ const Register = () => {
 
     try {
       await register(formData.name, formData.email, formData.password);
-      navigate("/login");
+      navigate("/home");  // ✅ Changed from "/" to "/home"
     } catch (err) {
       console.error("Register Error:", err);
 
       setError(
         err?.message ||
-          (typeof err === "string" ? err : "Registration failed")
+        (typeof err === "string" ? err : "Registration failed")
       );
     } finally {
       setLoading(false);
@@ -53,7 +54,7 @@ const Register = () => {
           </div>
         )}
 
-        <form onSubmit={onSubmit} className="space-y-6">
+        <form onSubmit={onSubmit} className="space-y-6" autoComplete="off">
 
           {/* Name */}
           <div>
@@ -63,6 +64,7 @@ const Register = () => {
             <input
               type="text"
               name="name"
+              autoComplete="off"
               value={formData.name}
               onChange={onChange}
               required
@@ -79,6 +81,7 @@ const Register = () => {
             <input
               type="email"
               name="email"
+              autoComplete="off"
               value={formData.email}
               onChange={onChange}
               required
@@ -95,6 +98,7 @@ const Register = () => {
             <input
               type="password"
               name="password"
+              autoComplete="new-password"
               value={formData.password}
               onChange={onChange}
               required
