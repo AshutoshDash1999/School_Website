@@ -2,11 +2,13 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // ✅ Password toggle state
 
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="max-w-md w-full bg-[var(--card-bg)] rounded-xl shadow-lg p-8">
+      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
         
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Welcome Back
@@ -68,7 +70,7 @@ const Login = () => {
             />
           </div>
 
-          {/* Password */}
+          {/* Password with Toggle Button */}
           <div>
             <div className="flex items-center justify-between">
               <label className="block text-sm font-medium text-gray-700">
@@ -83,16 +85,26 @@ const Login = () => {
               </Link>
             </div>
 
-            <input
-              type="password"
-              name="password"
-              autoComplete="new-password"
-              value={formData.password}
-              onChange={onChange}
-              required
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-              placeholder="••••••••"
-            />
+            <div className="relative mt-1">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                autoComplete="new-password"
+                value={formData.password}
+                onChange={onChange}
+                required
+                className="block w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           {/* Submit */}
