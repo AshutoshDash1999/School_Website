@@ -41,7 +41,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-// ✅ Protected Route - ONLY logged in users can access
+//  Protected Route - ONLY logged in users can access
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   
@@ -52,7 +52,7 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// ✅ Public Route - Only for non-logged in users (Login/Register)
+// Public Route - Only for non-logged in users (Login/Register)
 const PublicRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   
