@@ -56,14 +56,14 @@ const EventCalendar = () => {
         ))}
       </div>
 
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 sm:mb-12">
         <p className="text-xl font-semibold text-gray-700">
           Total Upcoming Events: {filteredEvents.length}
         </p>
       </div>
 
       {upcomingEvent && (
-        <div className="max-w-4xl mx-auto mb-12">
+        <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
           <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border-l-4 border-yellow-500 p-6 rounded-2xl shadow-lg">
             <h2 className="text-2xl font-bold text-yellow-800 mb-2">
               🌟 Upcoming Event
@@ -81,8 +81,8 @@ const EventCalendar = () => {
       )}
 
       {/* Calendar Section */}
-      <div className="flex justify-center mb-16 sm:mb-32 mt-6">
-        <div className="bg-white p-4 sm:p-8 rounded-3xl shadow-2xl border border-blue-100 sm:scale-125">
+      <div className="flex justify-center mb-16 sm:mb-32 mt-8 sm:mt-12">
+        <div className="bg-white p-4 sm:p-8 rounded-3xl shadow-2xl border border-blue-100 sm:scale-125 sm:origin-top">
           <Calendar onChange={setDate} value={date} />
         </div>
       </div>
