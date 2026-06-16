@@ -20,8 +20,6 @@ const getDaysLeft = (eventDate) => {
 const EventCalendar = () => {
   const [date, setDate] = useState(new Date());
   const [currentRole, setCurrentRole] = useState("student");
-  const exportPDF = () => {
-    const doc = new jsPDF();
 
   const filteredEvents = events.filter((event) => event.role === currentRole);
   const selectedDate = date.toISOString().split("T")[0];
@@ -31,6 +29,20 @@ const EventCalendar = () => {
   );
 
   const upcomingEvent = filteredEvents.find((event) => getDaysLeft(event.date) >= 0);
+
+  const exportPDF = () => {
+    const doc = new jsPDF();
+    autoTable(doc, {
+      head: [["Title", "Date", "Role", "Description"]],
+      body: filteredEvents.map((event) => [
+        event.title,
+        event.date,
+        event.role,
+        event.description,
+      ]),
+    });
+    doc.save("events.pdf");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-6 py-10">
